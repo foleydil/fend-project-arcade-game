@@ -7,11 +7,10 @@ class Enemy {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    // All enemies start to the left of the canvas, at x=-100
-    this.x = -100;
     // Assign random starting position to the enemy object
+    this.x = -100 - (Math.random() * 500);
     this.y = 60 + (Math.floor(Math.random() * 3) * 83);
-    // Assign random speed factor, from 1-4, to the enemy object
+    // Assign random speed to the enemy object
     this.speed = 150 + (Math.floor(Math.random() * 300));
   }
 
@@ -22,12 +21,15 @@ class Enemy {
     // which will ensure the game runs at the same speed for
     // all computers.
 
-    //check if enemy has moved offscreen, re-set speed & position of enemy if so
+    // Check if enemy has moved offscreen, re-set speed & position of enemy if so
     if (this.x > 500) {
       this.x = -100 - (Math.random() * 500);
       this.y = 60 + (Math.floor(Math.random() * 3) * 83);
       this.speed = 150 + (Math.floor(Math.random() * 300));
     }
+
+    // TODO: Handle when enemy collides with a player. Should reset all Enemies
+    // and the player to starting positions
 
     this.x += (this.speed * dt);
   }
@@ -50,26 +52,70 @@ class Player {
   }
 
   update() {
-
+  // TODO: Update player's x & y position. Will need to use output from
+  // handleInput function.
   }
 
   render() {
     ctx.drawImage(Resources.get(this.plyrImage), this.x, this.y);
   }
 
-  handleInput() {
-
+  handleInput(dir) {
+    /* TODO:
+    ** Left key should move the player to the left, right key to the right, up
+    ** should move the player up and down should move the player down.
+    **
+    ** Recall that the player cannot move off screen (so you will need to check
+    ** for that and handle appropriately).
+    **
+    ** If the player reaches the water the game should be reset by moving the
+    ** player back to the initial location (you can write a separate reset
+    ** Player method to handle that).
+    */
+    switch (dir) {
+      case 'left':
+        if (player.x > 0) {
+          player.x -= 100;
+          break;
+        } else {
+          break;
+        };
+      case 'right':
+        if (player.x < 400) {
+          player.x += 100;
+          break;
+        } else {
+          break;
+        };
+      case 'up':
+        if (player.y > 0) {
+          player.y -= 83;
+          break;
+        } else {
+          break;
+        };
+      case 'down':
+        if (player.y < 350) {
+          player.y += 83;
+          break;
+        } else {
+          break;
+        };
+      default:
+        break;
+    };
   }
-};
+}
 
 // Now instantiate your objects.
+// Place the player object in a variable called player
+let player = new Player();
+
 // Place all enemy objects in an array called allEnemies
 let allEnemies = [];
 for (var i = 0; i < 3; i++) {
   allEnemies.push(new Enemy());
 };
-// Place the player object in a variable called player
-let player = new Player();
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

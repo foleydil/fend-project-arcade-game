@@ -1,13 +1,13 @@
 // Enemies our player must avoid
 class Enemy {
-  constructor(x = 0, y = 60) {
+  constructor(y = 60) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    this.x = x;
+    this.x = 0;
     this.y = y;
   }
 
@@ -30,10 +30,10 @@ class Enemy {
 // This class requires an update(), render() and
 // a handleInput() method.
 class Player {
-  constructor(plyrImage = 'images/char-boy.png', x = 200, y = 320) {
-    this.plyrImage = plyrImage;
-    this.x = x;
-    this.y = y;
+  constructor() {
+    this.plyrImage = 'images/char-boy.png';
+    this.x = 200;
+    this.y = 320;
   }
 
   update() {
@@ -53,7 +53,8 @@ class Player {
 // Place all enemy objects in an array called allEnemies
 let allEnemies = [];
 for (var i = 0; i < 3; i++) {
-  allEnemies.push(new Enemy());
+  const yPos = 60 + (Math.floor(Math.random() * 3) * 83);
+  allEnemies.push(new Enemy(yPos));
 };
 // Place the player object in a variable called player
 let player = new Player();

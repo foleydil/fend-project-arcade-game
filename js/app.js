@@ -21,6 +21,14 @@ class Enemy {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+
+    //check if enemy has moved offscreen, re-set speed & position of enemy if so
+    if (this.x > 500) {
+      this.x = -100 - (Math.random() * 500);
+      this.y = 60 + (Math.floor(Math.random() * 3) * 83);
+      this.speed = 150 + (Math.floor(Math.random() * 300));
+    }
+
     this.x += (this.speed * dt);
   }
 

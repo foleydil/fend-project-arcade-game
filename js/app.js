@@ -1,14 +1,18 @@
 // Enemies our player must avoid
 class Enemy {
-  constructor(y = 60) {
+  constructor() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    this.x = 0;
-    this.y = y;
+    // All enemies start to the left of the canvas, at x=-100
+    this.x = -100;
+    // Assign random starting position to the enemy object
+    this.y = 60 + (Math.floor(Math.random() * 3) * 83);
+    // Assign random speed factor, from 1-4, to the enemy object
+    this.speed = 150 + (Math.floor(Math.random() * 300));
   }
 
   // Update the enemy's position, required method for game
@@ -17,6 +21,7 @@ class Enemy {
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
+    this.x += (this.speed * dt);
   }
 
   // Draw the enemy on the screen, required method for game
@@ -53,8 +58,7 @@ class Player {
 // Place all enemy objects in an array called allEnemies
 let allEnemies = [];
 for (var i = 0; i < 3; i++) {
-  const yPos = 60 + (Math.floor(Math.random() * 3) * 83);
-  allEnemies.push(new Enemy(yPos));
+  allEnemies.push(new Enemy());
 };
 // Place the player object in a variable called player
 let player = new Player();

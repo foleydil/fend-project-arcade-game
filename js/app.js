@@ -32,7 +32,8 @@ class Enemy {
 
     if (checkCollision()) {
       setTimeout(function() {
-        player = new Player();
+        player.x = 200;
+        player.y = 320;
       }, 100);
     };
 
@@ -50,7 +51,15 @@ class Enemy {
 // a handleInput() method.
 class Player {
   constructor() {
-    this.plyrImage = 'images/char-boy.png';
+    const plyrImages = [
+      'images/char-boy.png',
+      'images/char-cat-girl.png',
+      'images/char-horn-girl.png',
+      'images/char-pink-girl.png',
+      'images/char-princess-girl.png'
+    ];
+    const charIndex = Math.floor(Math.random() * 5);
+    this.plyrImage = plyrImages[charIndex];
     this.x = 200;
     this.y = 320;
   }
@@ -63,8 +72,7 @@ class Player {
 
     if (player.y < 0) {
       setTimeout(function() {window.alert("you win!")}, 1);
-      player.x = 200;
-      player.y = 320;
+      player = new Player();
     };
   }
 

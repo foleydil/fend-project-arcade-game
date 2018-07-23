@@ -1,11 +1,11 @@
-// Enemies our player must avoid
+/*
+** CLASS DECLARATIONS **
+*/
+
+// Enemies the player must avoid
 class Enemy {
   constructor() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
+    // The image for our enemies, this uses a helper to easily load images
     this.sprite = 'images/enemy-bug.png';
     // Assign random starting position to the enemy object
     this.x = -100 - (Math.random() * 500);
@@ -14,22 +14,24 @@ class Enemy {
     this.speed = 150 + (Math.floor(Math.random() * 300));
   };
 
-  // Update the enemy's position, required method for game
+  // Update the enemy's position
   // Parameter: dt, a time delta between ticks
   update(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
 
-    // Check if enemy has moved offscreen, re-set speed & position of enemy if so
+    // Check if enemy has moved offscreen,
+    // re-set speed & position of enemy if so
     if (this.x > 500) {
       this.x = -100 - (Math.random() * 500);
       this.y = 60 + (Math.floor(Math.random() * 3) * 83);
       this.speed = 150 + (Math.floor(Math.random() * 300));
     }
 
+    // Multiply any movement by the dt parameter to ensure the game runs
+    // at the same speed for all computers.
     this.x += (this.speed * dt);
 
+    // Continously check if the player has collided with an enemy,
+    // re-set the player to starting position if a collision happens
     if (checkCollision()) {
       setTimeout(function() {
         player.x = 200;
@@ -39,18 +41,17 @@ class Enemy {
 
   }
 
-  // Draw the enemy on the screen, required method for game
+  // Draw the enemy on the screen
   render() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
   }
 }
 
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
+// The player
 class Player {
   constructor() {
+    // Assign a random character to the player object when instantiated
     const plyrImages = [
       'images/char-boy.png',
       'images/char-cat-girl.png',
@@ -64,18 +65,24 @@ class Player {
     this.y = 320;
   }
 
+  // Required from engine.js and based on project rubric,
+  // but player position is actually updated in the handleInput method.
   update() {
   }
 
+  // Draw the player on the screen
   render() {
     ctx.drawImage(Resources.get(this.plyrImage), this.x, this.y);
 
+    // Check if player has reached the goal, and re-instatiate player if so.
+    // Also displays congratulatory message.
     if (player.y < 0) {
       setTimeout(function() {window.alert("you win!");}, 1);
       player = new Player();
     }
   }
 
+  // Update user position based on input from keyboard.
   handleInput(dir) {
     switch (dir) {
       case 'left':
@@ -108,6 +115,10 @@ class Player {
   }
 }
 
+/*
+** FUNCTION DECLARATIONS **
+*/
+
 // Function to check for collisions, runs inside enemy.update method
 function checkCollision() {
   for (const enemy of allEnemies) {
@@ -119,8 +130,11 @@ function checkCollision() {
   }
 }
 
-// Now instantiate your objects.
-// Place the player object in a variable called player
+/*
+** CODE EXECUTED ON LOAD **
+*/
+
+// Instatiate the player
 let player = new Player();
 
 // Place all enemy objects in an array called allEnemies
@@ -129,8 +143,7 @@ for (var i = 0; i < 3; i++) {
   allEnemies.push(new Enemy());
 }
 
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+// Listens for key presses and sends the key to the Player.handleInput() method.
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',

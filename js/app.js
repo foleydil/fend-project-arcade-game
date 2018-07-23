@@ -35,6 +35,7 @@ class Enemy {
         player = new Player();
       }, 100);
     };
+
   }
 
   // Draw the enemy on the screen, required method for game
@@ -59,6 +60,12 @@ class Player {
 
   render() {
     ctx.drawImage(Resources.get(this.plyrImage), this.x, this.y);
+
+    if (player.y < 0) {
+      setTimeout(function() {window.alert("you win!")}, 1);
+      player.x = 200;
+      player.y = 320;
+    };
   }
 
   handleInput(dir) {

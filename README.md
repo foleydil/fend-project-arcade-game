@@ -1,6 +1,28 @@
-frontend-nanodegree-arcade-game
-===============================
+# Arcade Game Clone Project
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+## Table of Contents
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+* [Overview](#overview)
+* [Dependencies](#dependencies)
+* [Contributing](#contributing)
+
+## Overview
+
+This is the "Arcade Game Clone" project, a part of the Front End Web Developer Nanodegree program.
+
+The program is a clone of the classic video game Frogger, using HTML/CSS and vanilla Javascript.
+To play, open `index.html` in a browser.
+
+The user must use the keyboard's directional buttons to move the character from the bottom of the
+screen to the top. If they collide with an enemy, their position resets. When the user wins, they receive
+a congratulatory message, and the game resets. This version of the game also randomizes the character at the beginning of each game (on page load or after winning).
+
+## Dependencies
+
+Image resources are local.
+
+This game incorporates some JavaScript ES6 elements, and may not work on older browsers or those not compatible with ES6 features.
+
+## Contributing
+
+This repository is my completion of a Udacity Nanodegree project. Therefore, I will most likely will not accept pull requests.

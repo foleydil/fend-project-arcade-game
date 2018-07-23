@@ -12,7 +12,7 @@ class Enemy {
     this.y = 60 + (Math.floor(Math.random() * 3) * 83);
     // Assign random speed to the enemy object
     this.speed = 150 + (Math.floor(Math.random() * 300));
-  }
+  };
 
   // Update the enemy's position, required method for game
   // Parameter: dt, a time delta between ticks
@@ -35,7 +35,7 @@ class Enemy {
         player.x = 200;
         player.y = 320;
       }, 100);
-    };
+    }
 
   }
 
@@ -71,9 +71,9 @@ class Player {
     ctx.drawImage(Resources.get(this.plyrImage), this.x, this.y);
 
     if (player.y < 0) {
-      setTimeout(function() {window.alert("you win!")}, 1);
+      setTimeout(function() {window.alert("you win!");}, 1);
       player = new Player();
-    };
+    }
   }
 
   handleInput(dir) {
@@ -82,30 +82,26 @@ class Player {
         if (player.x > 0) {
           player.x -= 100;
           break;
-        } else {
-          break;
-        };
+        }
+        break;
       case 'right':
         if (player.x < 400) {
           player.x += 100;
           break;
-        } else {
-          break;
-        };
+        }
+        break;
       case 'up':
         if (player.y > 0) {
           player.y -= 83;
           break;
-        } else {
-          break;
-        };
+        }
+        break;
       case 'down':
         if (player.y < 350) {
           player.y += 83;
           break;
-        } else {
-          break;
-        };
+        }
+        break;
       default:
         break;
     };
@@ -119,7 +115,7 @@ function checkCollision() {
     const ydiff = player.y - enemy.y;
     if (ydiff > 0 && ydiff < 15 && xdiff > -50 && xdiff < 75) {
       return true;
-    };
+    }
   }
 }
 
@@ -131,7 +127,7 @@ let player = new Player();
 const allEnemies = [];
 for (var i = 0; i < 3; i++) {
   allEnemies.push(new Enemy());
-};
+}
 
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.

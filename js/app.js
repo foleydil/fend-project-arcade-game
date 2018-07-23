@@ -28,10 +28,13 @@ class Enemy {
       this.speed = 150 + (Math.floor(Math.random() * 300));
     }
 
-    // TODO: Handle when enemy collides with a player. Should reset all Enemies
-    // and the player to starting positions
-
     this.x += (this.speed * dt);
+
+    if (checkCollision()) {
+      setTimeout(function() {
+        player = new Player();
+      }, 100);
+    };
   }
 
   // Draw the enemy on the screen, required method for game
@@ -52,8 +55,6 @@ class Player {
   }
 
   update() {
-  // TODO: Update player's x & y position. Will need to use output from
-  // handleInput function.
   }
 
   render() {
@@ -61,17 +62,6 @@ class Player {
   }
 
   handleInput(dir) {
-    /* TODO:
-    ** Left key should move the player to the left, right key to the right, up
-    ** should move the player up and down should move the player down.
-    **
-    ** Recall that the player cannot move off screen (so you will need to check
-    ** for that and handle appropriately).
-    **
-    ** If the player reaches the water the game should be reset by moving the
-    ** player back to the initial location (you can write a separate reset
-    ** Player method to handle that).
-    */
     switch (dir) {
       case 'left':
         if (player.x > 0) {
@@ -107,12 +97,23 @@ class Player {
   }
 }
 
+// Function to check for collisions, runs inside enemy.update method
+function checkCollision() {
+  for (const enemy of allEnemies) {
+    const xdiff = player.x - enemy.x;
+    const ydiff = player.y - enemy.y;
+    if (ydiff > 0 && ydiff < 15 && xdiff > -50 && xdiff < 75) {
+      return true;
+    };
+  }
+}
+
 // Now instantiate your objects.
 // Place the player object in a variable called player
 let player = new Player();
 
 // Place all enemy objects in an array called allEnemies
-let allEnemies = [];
+const allEnemies = [];
 for (var i = 0; i < 3; i++) {
   allEnemies.push(new Enemy());
 };
